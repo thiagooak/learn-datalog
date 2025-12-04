@@ -8,14 +8,16 @@ kill_timeout = "5s"
 
 [http_service]
   force_https = true
-  auto_stop_machines = "off"
+  auto_stop_machines = "stop"
   auto_start_machines = false
   min_machines_running = 0
   [http_service.concurrency]
     type = "requests"
     soft_limit = 200
     hard_limit = 250
+  [[http_service.checks]]
+    grace_period = "10s"
 
 [[vm]]
-  size = "shared-cpu-1x"
-  memory = "256MB"
+  size = "shared-cpu-2x"
+  memory = "2GB"
