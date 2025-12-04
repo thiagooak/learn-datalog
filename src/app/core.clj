@@ -3,7 +3,9 @@
             [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
             [uix.dom.server :as dom.server]
-            [uix.core :as uix :refer [defui $]])
+            [uix.core :as uix :refer [defui $]]
+            [datomic.api :as d]
+            [app.db])
   (:gen-class))
 
 (defui page [{:keys [title children]}]
@@ -20,14 +22,21 @@
            children)
         ($ :script {:src "/js/main.js"}))))
 
+(defn pokemon-names []
+  (let [conn (app.db/scratch-conn)]
+    (app.db/setup-db conn)
+    (str (d/q '[:find ?n
+                :where [?e :pokemon/name ?n]]
+              (d/db conn)))))
+
 (defroutes routes
   ;; In a real system, you would serve static files from a CDN
   (route/files "/" {:root "public"})
   ;; Api routes
-  (GET "/api/server-time" req
+  (GET "/api/pokemon-names" req
     {:status 200
      :headers {"Content-Type" "text/plain"}
-     :body (str (java.util.Date.))})
+     :body (pokemon-names)})
   ;; SPA mode: Renders HTML page for all routes
   (GET "*" req
     (dom.server/render-to-string ($ page {:title "Hello, UIx!"}))))
@@ -42,4 +51,5 @@
   (run-server))
 
 (comment
-  (def stop-server (-main)))
+  (def stop-server (-main))
+  (stop-server))
