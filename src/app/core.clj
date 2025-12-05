@@ -1,11 +1,12 @@
 (ns app.core
   (:require [org.httpkit.server :as http]
-            [compojure.core :refer [defroutes GET]]
+            [compojure.core :refer [defroutes GET POST]]
             [compojure.route :as route]
             [uix.dom.server :as dom.server]
             [uix.core :as uix :refer [defui $]]
             [datomic.api :as d]
-            [app.db])
+            [app.db]
+            [clojure.data.json :as json])
   (:gen-class))
 
 (defui page [{:keys [title children]}]
@@ -22,24 +23,24 @@
            children)
         ($ :script {:src "/js/main.js"}))))
 
-(defn pokemon-names []
-  (let [conn (app.db/scratch-conn)]
+(defn run-q [req]
+  (let [body (json/read-str (slurp (:body req)))
+        q (get body "q")
+        conn (app.db/scratch-conn)]
     (app.db/setup-db conn)
-    (str (d/q '[:find ?n
-                :where [?e :pokemon/name ?n]]
-              (d/db conn)))))
+    (str (d/q q (d/db conn)))))
 
 (defroutes routes
   ;; In a real system, you would serve static files from a CDN
   (route/files "/" {:root "public"})
   ;; Api routes
-  (GET "/api/pokemon-names" req
+  (POST "/api/q" req
     {:status 200
      :headers {"Content-Type" "text/plain"}
-     :body (pokemon-names)})
+     :body (run-q req)})
   ;; SPA mode: Renders HTML page for all routes
   (GET "*" req
-    (dom.server/render-to-string ($ page {:title "Hello, UIx!"}))))
+    (dom.server/render-to-string ($ page {:title "Learn Datalog"}))))
 
 (defn run-server []
   (let [port (or (some-> (System/getenv "PORT") parse-long)
