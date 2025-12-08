@@ -1,18 +1,184 @@
 ;; Schema
 
-[{:db/ident :pokemon/name
+[{:db/ident :pokemon/number
   :db/valueType :db.type/string
   :db/cardinality :db.cardinality/one}
- {:db/ident :stat/hit-points
+ {:db/ident :pokemon/name
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/one}
+ {:db/ident :pokemon/type
+  :db/valueType :db.type/string
+  :db/cardinality :db.cardinality/many}
+ {:db/ident :stat/hp
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one}
+ {:db/ident :stat/attack
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one}
+ {:db/ident :stat/defense
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one}
+ {:db/ident :stat/sp-attack
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one}
+ {:db/ident :stat/sp-defense
+  :db/valueType :db.type/long
+  :db/cardinality :db.cardinality/one}
+ {:db/ident :stat/speed
   :db/valueType :db.type/long
   :db/cardinality :db.cardinality/one}]
 
 ;; Data
 ; https://pokemondb.net/tools/text-list
 
-[{:pokemon/name "Bulbasaur"  :stat/hit-points 45}
- {:pokemon/name "Ivysaur"    :stat/hit-points 60}
- {:pokemon/name "Venusaur"   :stat/hit-points 80}
- {:pokemon/name "Charmander" :stat/hit-points 39}
- {:pokemon/name "Charmeleon" :stat/hit-points 58}
- {:pokemon/name "Charizard"  :stat/hit-points 78}]
+[{:stat/hp 45, :stat/attack 49, :stat/speed 45, :pokemon/number "001", :stat/sp-defense 65, :stat/defense 49, :pokemon/name  "Bulbasaur", :stat/sp-attack 65, :pokemon/type ["Grass" "Poison"]}
+ {:stat/hp 60, :stat/attack 62, :stat/speed 60, :pokemon/number "002", :stat/sp-defense 80, :stat/defense 63, :pokemon/name "Ivysaur", :stat/sp-attack 80, :pokemon/type ["Grass" "Poison"]}
+ {:stat/hp 80, :stat/attack 82, :stat/speed 80, :pokemon/number "003", :stat/sp-defense 100, :stat/defense 83, :pokemon/name "Venusaur", :stat/sp-attack 100, :pokemon/type ["Grass" "Poison"]}
+ {:stat/hp 39, :stat/attack 52, :stat/speed 65, :pokemon/number "004", :stat/sp-defense 50, :stat/defense 43, :pokemon/name "Charmander", :stat/sp-attack 60, :pokemon/type ["Fire"]}
+ {:stat/hp 58, :stat/attack 64, :stat/speed 80, :pokemon/number "005", :stat/sp-defense 65, :stat/defense 58, :pokemon/name "Charmeleon", :stat/sp-attack 80, :pokemon/type ["Fire"]}
+ {:stat/hp 78, :stat/attack 84, :stat/speed 100, :pokemon/number "006", :stat/sp-defense 85, :stat/defense 78, :pokemon/name "Charizard", :stat/sp-attack 109, :pokemon/type ["Fire" "Flying"]}
+ {:stat/hp 44, :stat/attack 48, :stat/speed 43, :pokemon/number "007", :stat/sp-defense 64, :stat/defense 65, :pokemon/name "Squirtle", :stat/sp-attack 50, :pokemon/type ["Water"]}
+ {:stat/hp 59, :stat/attack 63, :stat/speed 58, :pokemon/number "008", :stat/sp-defense 80, :stat/defense 80, :pokemon/name "Wartortle", :stat/sp-attack 65, :pokemon/type ["Water"]}
+ {:stat/hp 79, :stat/attack 83, :stat/speed 78, :pokemon/number "009", :stat/sp-defense 105, :stat/defense 100, :pokemon/name "Blastoise", :stat/sp-attack 85, :pokemon/type ["Water"]}
+ {:stat/hp 45, :stat/attack 30, :stat/speed 45, :pokemon/number "010", :stat/sp-defense 20, :stat/defense 35, :pokemon/name "Caterpie", :stat/sp-attack 20, :pokemon/type ["Bug"]}
+ {:stat/hp 50, :stat/attack 20, :stat/speed 30, :pokemon/number "011", :stat/sp-defense 25, :stat/defense 55, :pokemon/name "Metapod", :stat/sp-attack 25, :pokemon/type ["Bug"]}
+ {:stat/hp 60, :stat/attack 45, :stat/speed 70, :pokemon/number "012", :stat/sp-defense 80, :stat/defense 50, :pokemon/name "Butterfree", :stat/sp-attack 90, :pokemon/type ["Bug" "Flying"]}
+ {:stat/hp 40, :stat/attack 35, :stat/speed 50, :pokemon/number "013", :stat/sp-defense 20, :stat/defense 30, :pokemon/name "Weedle", :stat/sp-attack 20, :pokemon/type ["Bug" "Poison"]}
+ {:stat/hp 45, :stat/attack 25, :stat/speed 35, :pokemon/number "014", :stat/sp-defense 25, :stat/defense 50, :pokemon/name "Kakuna", :stat/sp-attack 25, :pokemon/type ["Bug" "Poison"]}
+ {:stat/hp 65, :stat/attack 90, :stat/speed 75, :pokemon/number "015", :stat/sp-defense 80, :stat/defense 40, :pokemon/name "Beedrill", :stat/sp-attack 45, :pokemon/type ["Bug" "Poison"]}
+ {:stat/hp 40, :stat/attack 45, :stat/speed 56, :pokemon/number "016", :stat/sp-defense 35, :stat/defense 40, :pokemon/name "Pidgey", :stat/sp-attack 35, :pokemon/type ["Normal" "Flying"]}
+ {:stat/hp 63, :stat/attack 60, :stat/speed 71, :pokemon/number "017", :stat/sp-defense 50, :stat/defense 55, :pokemon/name "Pidgeotto", :stat/sp-attack 50, :pokemon/type ["Normal" "Flying"]}
+ {:stat/hp 83, :stat/attack 80, :stat/speed 101, :pokemon/number "018", :stat/sp-defense 70, :stat/defense 75, :pokemon/name "Pidgeot", :stat/sp-attack 70, :pokemon/type ["Normal" "Flying"]}
+ {:stat/hp 30, :stat/attack 56, :stat/speed 72, :pokemon/number "019", :stat/sp-defense 35, :stat/defense 35, :pokemon/name "Rattata", :stat/sp-attack 25, :pokemon/type ["Normal"]}
+ {:stat/hp 55, :stat/attack 81, :stat/speed 97, :pokemon/number "020", :stat/sp-defense 70, :stat/defense 60, :pokemon/name "Raticate", :stat/sp-attack 50, :pokemon/type ["Normal"]}
+ {:stat/hp 40, :stat/attack 60, :stat/speed 70, :pokemon/number "021", :stat/sp-defense 31, :stat/defense 30, :pokemon/name "Spearow", :stat/sp-attack 31, :pokemon/type ["Normal" "Flying"]}
+ {:stat/hp 65, :stat/attack 90, :stat/speed 100, :pokemon/number "022", :stat/sp-defense 61, :stat/defense 65, :pokemon/name "Fearow", :stat/sp-attack 61, :pokemon/type ["Normal" "Flying"]}
+ {:stat/hp 35, :stat/attack 60, :stat/speed 55, :pokemon/number "023", :stat/sp-defense 54, :stat/defense 44, :pokemon/name "Ekans", :stat/sp-attack 40, :pokemon/type ["Poison"]}
+ {:stat/hp 60, :stat/attack 95, :stat/speed 80, :pokemon/number "024", :stat/sp-defense 79, :stat/defense 69, :pokemon/name "Arbok", :stat/sp-attack 65, :pokemon/type ["Poison"]}
+ {:stat/hp 35, :stat/attack 55, :stat/speed 90, :pokemon/number "025", :stat/sp-defense 50, :stat/defense 40, :pokemon/name "Pikachu", :stat/sp-attack 50, :pokemon/type ["Electric"]}
+ {:stat/hp 60, :stat/attack 90, :stat/speed 110, :pokemon/number "026", :stat/sp-defense 80, :stat/defense 55, :pokemon/name "Raichu", :stat/sp-attack 90, :pokemon/type ["Electric"]}
+ {:stat/hp 50, :stat/attack 75, :stat/speed 40, :pokemon/number "027", :stat/sp-defense 30, :stat/defense 85, :pokemon/name "Sandshrew", :stat/sp-attack 20, :pokemon/type ["Ground"]}
+ {:stat/hp 75, :stat/attack 100, :stat/speed 65, :pokemon/number "028", :stat/sp-defense 55, :stat/defense 110, :pokemon/name "Sandslash", :stat/sp-attack 45, :pokemon/type ["Ground"]}
+ {:stat/hp 55, :stat/attack 47, :stat/speed 41, :pokemon/number "029", :stat/sp-defense 40, :stat/defense 52, :pokemon/name "Nidoran♀", :stat/sp-attack 40, :pokemon/type ["Poison"]}
+ {:stat/hp 70, :stat/attack 62, :stat/speed 56, :pokemon/number "030", :stat/sp-defense 55, :stat/defense 67, :pokemon/name "Nidorina", :stat/sp-attack 55, :pokemon/type ["Poison"]}
+ {:stat/hp 90, :stat/attack 92, :stat/speed 76, :pokemon/number "031", :stat/sp-defense 85, :stat/defense 87, :pokemon/name "Nidoqueen", :stat/sp-attack 75, :pokemon/type ["Poison" "Ground"]}
+ {:stat/hp 46, :stat/attack 57, :stat/speed 50, :pokemon/number "032", :stat/sp-defense 40, :stat/defense 40, :pokemon/name "Nidoran♂", :stat/sp-attack 40, :pokemon/type ["Poison"]}
+ {:stat/hp 61, :stat/attack 72, :stat/speed 65, :pokemon/number "033", :stat/sp-defense 55, :stat/defense 57, :pokemon/name "Nidorino", :stat/sp-attack 55, :pokemon/type ["Poison"]}
+ {:stat/hp 81, :stat/attack 102, :stat/speed 85, :pokemon/number "034", :stat/sp-defense 75, :stat/defense 77, :pokemon/name "Nidoking", :stat/sp-attack 85, :pokemon/type ["Poison" "Ground"]}
+ {:stat/hp 70, :stat/attack 45, :stat/speed 35, :pokemon/number "035", :stat/sp-defense 65, :stat/defense 48, :pokemon/name "Clefairy", :stat/sp-attack 60, :pokemon/type ["Fairy"]}
+ {:stat/hp 95, :stat/attack 70, :stat/speed 60, :pokemon/number "036", :stat/sp-defense 90, :stat/defense 73, :pokemon/name "Clefable", :stat/sp-attack 95, :pokemon/type ["Fairy"]}
+ {:stat/hp 38, :stat/attack 41, :stat/speed 65, :pokemon/number "037", :stat/sp-defense 65, :stat/defense 40, :pokemon/name "Vulpix", :stat/sp-attack 50, :pokemon/type ["Fire"]}
+ {:stat/hp 73, :stat/attack 76, :stat/speed 100, :pokemon/number "038", :stat/sp-defense 100, :stat/defense 75, :pokemon/name "Ninetales", :stat/sp-attack 81, :pokemon/type ["Fire"]}
+ {:stat/hp 115, :stat/attack 45, :stat/speed 20, :pokemon/number "039", :stat/sp-defense 25, :stat/defense 20, :pokemon/name "Jigglypuff", :stat/sp-attack 45, :pokemon/type ["Normal" "Fairy"]}
+ {:stat/hp 140, :stat/attack 70, :stat/speed 45, :pokemon/number "040", :stat/sp-defense 50, :stat/defense 45, :pokemon/name "Wigglytuff", :stat/sp-attack 85, :pokemon/type ["Normal" "Fairy"]}
+ {:stat/hp 40, :stat/attack 45, :stat/speed 55, :pokemon/number "041", :stat/sp-defense 40, :stat/defense 35, :pokemon/name "Zubat", :stat/sp-attack 30, :pokemon/type ["Poison" "Flying"]}
+ {:stat/hp 75, :stat/attack 80, :stat/speed 90, :pokemon/number "042", :stat/sp-defense 75, :stat/defense 70, :pokemon/name "Golbat", :stat/sp-attack 65, :pokemon/type ["Poison" "Flying"]}
+ {:stat/hp 45, :stat/attack 50, :stat/speed 30, :pokemon/number "043", :stat/sp-defense 65, :stat/defense 55, :pokemon/name "Oddish", :stat/sp-attack 75, :pokemon/type ["Grass" "Poison"]}
+ {:stat/hp 60, :stat/attack 65, :stat/speed 40, :pokemon/number "044", :stat/sp-defense 75, :stat/defense 70, :pokemon/name "Gloom", :stat/sp-attack 85, :pokemon/type ["Grass" "Poison"]}
+ {:stat/hp 75, :stat/attack 80, :stat/speed 50, :pokemon/number "045", :stat/sp-defense 90, :stat/defense 85, :pokemon/name "Vileplume", :stat/sp-attack 110, :pokemon/type ["Grass" "Poison"]}
+ {:stat/hp 35, :stat/attack 70, :stat/speed 25, :pokemon/number "046", :stat/sp-defense 55, :stat/defense 55, :pokemon/name "Paras", :stat/sp-attack 45, :pokemon/type ["Bug" "Grass"]}
+ {:stat/hp 60, :stat/attack 95, :stat/speed 30, :pokemon/number "047", :stat/sp-defense 80, :stat/defense 80, :pokemon/name "Parasect", :stat/sp-attack 60, :pokemon/type ["Bug" "Grass"]}
+ {:stat/hp 60, :stat/attack 55, :stat/speed 45, :pokemon/number "048", :stat/sp-defense 55, :stat/defense 50, :pokemon/name "Venonat", :stat/sp-attack 40, :pokemon/type ["Bug" "Poison"]}
+ {:stat/hp 70, :stat/attack 65, :stat/speed 90, :pokemon/number "049", :stat/sp-defense 75, :stat/defense 60, :pokemon/name "Venomoth", :stat/sp-attack 90, :pokemon/type ["Bug" "Poison"]}
+ {:stat/hp 10, :stat/attack 55, :stat/speed 95, :pokemon/number "050", :stat/sp-defense 45, :stat/defense 25, :pokemon/name "Diglett", :stat/sp-attack 35, :pokemon/type ["Ground"]}
+ {:stat/hp 35, :stat/attack 100, :stat/speed 120, :pokemon/number "051", :stat/sp-defense 70, :stat/defense 50, :pokemon/name "Dugtrio", :stat/sp-attack 50, :pokemon/type ["Ground"]}
+ {:stat/hp 40, :stat/attack 45, :stat/speed 90, :pokemon/number "052", :stat/sp-defense 40, :stat/defense 35, :pokemon/name "Meowth", :stat/sp-attack 40, :pokemon/type ["Normal"]}
+ {:stat/hp 65, :stat/attack 70, :stat/speed 115, :pokemon/number "053", :stat/sp-defense 65, :stat/defense 60, :pokemon/name "Persian", :stat/sp-attack 65, :pokemon/type ["Normal"]}
+ {:stat/hp 50, :stat/attack 52, :stat/speed 55, :pokemon/number "054", :stat/sp-defense 50, :stat/defense 48, :pokemon/name "Psyduck", :stat/sp-attack 65, :pokemon/type ["Water"]}
+ {:stat/hp 80, :stat/attack 82, :stat/speed 85, :pokemon/number "055", :stat/sp-defense 80, :stat/defense 78, :pokemon/name "Golduck", :stat/sp-attack 95, :pokemon/type ["Water"]}
+ {:stat/hp 40, :stat/attack 80, :stat/speed 70, :pokemon/number "056", :stat/sp-defense 45, :stat/defense 35, :pokemon/name "Mankey", :stat/sp-attack 35, :pokemon/type ["Fighting"]}
+ {:stat/hp 65, :stat/attack 105, :stat/speed 95, :pokemon/number "057", :stat/sp-defense 70, :stat/defense 60, :pokemon/name "Primeape", :stat/sp-attack 60, :pokemon/type ["Fighting"]}
+ {:stat/hp 55, :stat/attack 70, :stat/speed 60, :pokemon/number "058", :stat/sp-defense 50, :stat/defense 45, :pokemon/name "Growlithe", :stat/sp-attack 70, :pokemon/type ["Fire"]}
+ {:stat/hp 90, :stat/attack 110, :stat/speed 95, :pokemon/number "059", :stat/sp-defense 80, :stat/defense 80, :pokemon/name "Arcanine", :stat/sp-attack 100, :pokemon/type ["Fire"]}
+ {:stat/hp 40, :stat/attack 50, :stat/speed 90, :pokemon/number "060", :stat/sp-defense 40, :stat/defense 40, :pokemon/name "Poliwag", :stat/sp-attack 40, :pokemon/type ["Water"]}
+ {:stat/hp 65, :stat/attack 65, :stat/speed 90, :pokemon/number "061", :stat/sp-defense 50, :stat/defense 65, :pokemon/name "Poliwhirl", :stat/sp-attack 50, :pokemon/type ["Water"]}
+ {:stat/hp 90, :stat/attack 95, :stat/speed 70, :pokemon/number "062", :stat/sp-defense 90, :stat/defense 95, :pokemon/name "Poliwrath", :stat/sp-attack 70, :pokemon/type ["Water" "Fighting"]}
+ {:stat/hp 25, :stat/attack 20, :stat/speed 90, :pokemon/number "063", :stat/sp-defense 55, :stat/defense 15, :pokemon/name "Abra", :stat/sp-attack 105, :pokemon/type ["Psychic"]}
+ {:stat/hp 40, :stat/attack 35, :stat/speed 105, :pokemon/number "064", :stat/sp-defense 70, :stat/defense 30, :pokemon/name "Kadabra", :stat/sp-attack 120, :pokemon/type ["Psychic"]}
+ {:stat/hp 55, :stat/attack 50, :stat/speed 120, :pokemon/number "065", :stat/sp-defense 95, :stat/defense 45, :pokemon/name "Alakazam", :stat/sp-attack 135, :pokemon/type ["Psychic"]}
+ {:stat/hp 70, :stat/attack 80, :stat/speed 35, :pokemon/number "066", :stat/sp-defense 35, :stat/defense 50, :pokemon/name "Machop", :stat/sp-attack 35, :pokemon/type ["Fighting"]}
+ {:stat/hp 80, :stat/attack 100, :stat/speed 45, :pokemon/number "067", :stat/sp-defense 60, :stat/defense 70, :pokemon/name "Machoke", :stat/sp-attack 50, :pokemon/type ["Fighting"]}
+ {:stat/hp 90, :stat/attack 130, :stat/speed 55, :pokemon/number "068", :stat/sp-defense 85, :stat/defense 80, :pokemon/name "Machamp", :stat/sp-attack 65, :pokemon/type ["Fighting"]}
+ {:stat/hp 50, :stat/attack 75, :stat/speed 40, :pokemon/number "069", :stat/sp-defense 30, :stat/defense 35, :pokemon/name "Bellsprout", :stat/sp-attack 70, :pokemon/type ["Grass" "Poison"]}
+ {:stat/hp 65, :stat/attack 90, :stat/speed 55, :pokemon/number "070", :stat/sp-defense 45, :stat/defense 50, :pokemon/name "Weepinbell", :stat/sp-attack 85, :pokemon/type ["Grass" "Poison"]}
+ {:stat/hp 80, :stat/attack 105, :stat/speed 70, :pokemon/number "071", :stat/sp-defense 70, :stat/defense 65, :pokemon/name "Victreebel", :stat/sp-attack 100, :pokemon/type ["Grass" "Poison"]}
+ {:stat/hp 40, :stat/attack 40, :stat/speed 70, :pokemon/number "072", :stat/sp-defense 100, :stat/defense 35, :pokemon/name "Tentacool", :stat/sp-attack 50, :pokemon/type ["Water" "Poison"]}
+ {:stat/hp 80, :stat/attack 70, :stat/speed 100, :pokemon/number "073", :stat/sp-defense 120, :stat/defense 65, :pokemon/name "Tentacruel", :stat/sp-attack 80, :pokemon/type ["Water" "Poison"]}
+ {:stat/hp 40, :stat/attack 80, :stat/speed 20, :pokemon/number "074", :stat/sp-defense 30, :stat/defense 100, :pokemon/name "Geodude", :stat/sp-attack 30, :pokemon/type ["Rock" "Ground"]}
+ {:stat/hp 55, :stat/attack 95, :stat/speed 35, :pokemon/number "075", :stat/sp-defense 45, :stat/defense 115, :pokemon/name "Graveler", :stat/sp-attack 45, :pokemon/type ["Rock" "Ground"]}
+ {:stat/hp 80, :stat/attack 120, :stat/speed 45, :pokemon/number "076", :stat/sp-defense 65, :stat/defense 130, :pokemon/name "Golem", :stat/sp-attack 55, :pokemon/type ["Rock" "Ground"]}
+ {:stat/hp 50, :stat/attack 85, :stat/speed 90, :pokemon/number "077", :stat/sp-defense 65, :stat/defense 55, :pokemon/name "Ponyta", :stat/sp-attack 65, :pokemon/type ["Fire"]}
+ {:stat/hp 65, :stat/attack 100, :stat/speed 105, :pokemon/number "078", :stat/sp-defense 80, :stat/defense 70, :pokemon/name "Rapidash", :stat/sp-attack 80, :pokemon/type ["Fire"]}
+ {:stat/hp 90, :stat/attack 65, :stat/speed 15, :pokemon/number "079", :stat/sp-defense 40, :stat/defense 65, :pokemon/name "Slowpoke", :stat/sp-attack 40, :pokemon/type ["Water" "Psychic"]}
+ {:stat/hp 95, :stat/attack 75, :stat/speed 30, :pokemon/number "080", :stat/sp-defense 80, :stat/defense 110, :pokemon/name "Slowbro", :stat/sp-attack 100, :pokemon/type ["Water" "Psychic"]}
+ {:stat/hp 25, :stat/attack 35, :stat/speed 45, :pokemon/number "081", :stat/sp-defense 55, :stat/defense 70, :pokemon/name "Magnemite", :stat/sp-attack 95, :pokemon/type ["Electric" "Steel"]}
+ {:stat/hp 50, :stat/attack 60, :stat/speed 70, :pokemon/number "082", :stat/sp-defense 70, :stat/defense 95, :pokemon/name "Magneton", :stat/sp-attack 120, :pokemon/type ["Electric" "Steel"]}
+ {:stat/hp 52, :stat/attack 90, :stat/speed 60, :pokemon/number "083", :stat/sp-defense 62, :stat/defense 55, :pokemon/name "Farfetch'd", :stat/sp-attack 58, :pokemon/type ["Normal" "Flying"]}
+ {:stat/hp 35, :stat/attack 85, :stat/speed 75, :pokemon/number "084", :stat/sp-defense 35, :stat/defense 45, :pokemon/name "Doduo", :stat/sp-attack 35, :pokemon/type ["Normal" "Flying"]}
+ {:stat/hp 60, :stat/attack 110, :stat/speed 110, :pokemon/number "085", :stat/sp-defense 60, :stat/defense 70, :pokemon/name "Dodrio", :stat/sp-attack 60, :pokemon/type ["Normal" "Flying"]}
+ {:stat/hp 65, :stat/attack 45, :stat/speed 45, :pokemon/number "086", :stat/sp-defense 70, :stat/defense 55, :pokemon/name "Seel", :stat/sp-attack 45, :pokemon/type ["Water"]}
+ {:stat/hp 90, :stat/attack 70, :stat/speed 70, :pokemon/number "087", :stat/sp-defense 95, :stat/defense 80, :pokemon/name "Dewgong", :stat/sp-attack 70, :pokemon/type ["Water" "Ice"]}
+ {:stat/hp 80, :stat/attack 80, :stat/speed 25, :pokemon/number "088", :stat/sp-defense 50, :stat/defense 50, :pokemon/name "Grimer", :stat/sp-attack 40, :pokemon/type ["Poison"]}
+ {:stat/hp 105, :stat/attack 105, :stat/speed 50, :pokemon/number "089", :stat/sp-defense 100, :stat/defense 75, :pokemon/name "Muk", :stat/sp-attack 65, :pokemon/type ["Poison"]}
+ {:stat/hp 30, :stat/attack 65, :stat/speed 40, :pokemon/number "090", :stat/sp-defense 25, :stat/defense 100, :pokemon/name "Shellder", :stat/sp-attack 45, :pokemon/type ["Water"]}
+ {:stat/hp 50, :stat/attack 95, :stat/speed 70, :pokemon/number "091", :stat/sp-defense 45, :stat/defense 180, :pokemon/name "Cloyster", :stat/sp-attack 85, :pokemon/type ["Water" "Ice"]}
+ {:stat/hp 30, :stat/attack 35, :stat/speed 80, :pokemon/number "092", :stat/sp-defense 35, :stat/defense 30, :pokemon/name "Gastly", :stat/sp-attack 100, :pokemon/type ["Ghost" "Poison"]}
+ {:stat/hp 45, :stat/attack 50, :stat/speed 95, :pokemon/number "093", :stat/sp-defense 55, :stat/defense 45, :pokemon/name "Haunter", :stat/sp-attack 115, :pokemon/type ["Ghost" "Poison"]}
+ {:stat/hp 60, :stat/attack 65, :stat/speed 110, :pokemon/number "094", :stat/sp-defense 75, :stat/defense 60, :pokemon/name "Gengar", :stat/sp-attack 130, :pokemon/type ["Ghost" "Poison"]}
+ {:stat/hp 35, :stat/attack 45, :stat/speed 70, :pokemon/number "095", :stat/sp-defense 45, :stat/defense 160, :pokemon/name "Onix", :stat/sp-attack 30, :pokemon/type ["Rock" "Ground"]}
+ {:stat/hp 60, :stat/attack 48, :stat/speed 42, :pokemon/number "096", :stat/sp-defense 90, :stat/defense 45, :pokemon/name "Drowzee", :stat/sp-attack 43, :pokemon/type ["Psychic"]}
+ {:stat/hp 85, :stat/attack 73, :stat/speed 67, :pokemon/number "097", :stat/sp-defense 115, :stat/defense 70, :pokemon/name "Hypno", :stat/sp-attack 73, :pokemon/type ["Psychic"]}
+ {:stat/hp 30, :stat/attack 105, :stat/speed 50, :pokemon/number "098", :stat/sp-defense 25, :stat/defense 90, :pokemon/name "Krabby", :stat/sp-attack 25, :pokemon/type ["Water"]}
+ {:stat/hp 55, :stat/attack 130, :stat/speed 75, :pokemon/number "099", :stat/sp-defense 50, :stat/defense 115, :pokemon/name "Kingler", :stat/sp-attack 50, :pokemon/type ["Water"]}
+ {:stat/hp 40, :stat/attack 30, :stat/speed 100, :pokemon/number "100", :stat/sp-defense 55, :stat/defense 50, :pokemon/name "Voltorb", :stat/sp-attack 55, :pokemon/type ["Electric"]}
+ {:stat/hp 60, :stat/attack 50, :stat/speed 150, :pokemon/number "101", :stat/sp-defense 80, :stat/defense 70, :pokemon/name "Electrode", :stat/sp-attack 80, :pokemon/type ["Electric"]}
+ {:stat/hp 60, :stat/attack 40, :stat/speed 40, :pokemon/number "102", :stat/sp-defense 45, :stat/defense 80, :pokemon/name "Exeggcute", :stat/sp-attack 60, :pokemon/type ["Grass" "Psychic"]}
+ {:stat/hp 95, :stat/attack 95, :stat/speed 55, :pokemon/number "103", :stat/sp-defense 75, :stat/defense 85, :pokemon/name "Exeggutor", :stat/sp-attack 125, :pokemon/type ["Grass" "Psychic"]}
+ {:stat/hp 50, :stat/attack 50, :stat/speed 35, :pokemon/number "104", :stat/sp-defense 50, :stat/defense 95, :pokemon/name "Cubone", :stat/sp-attack 40, :pokemon/type ["Ground"]}
+ {:stat/hp 60, :stat/attack 80, :stat/speed 45, :pokemon/number "105", :stat/sp-defense 80, :stat/defense 110, :pokemon/name "Marowak", :stat/sp-attack 50, :pokemon/type ["Ground"]}
+ {:stat/hp 50, :stat/attack 120, :stat/speed 87, :pokemon/number "106", :stat/sp-defense 110, :stat/defense 53, :pokemon/name "Hitmonlee", :stat/sp-attack 35, :pokemon/type ["Fighting"]}
+ {:stat/hp 50, :stat/attack 105, :stat/speed 76, :pokemon/number "107", :stat/sp-defense 110, :stat/defense 79, :pokemon/name "Hitmonchan", :stat/sp-attack 35, :pokemon/type ["Fighting"]}
+ {:stat/hp 90, :stat/attack 55, :stat/speed 30, :pokemon/number "108", :stat/sp-defense 75, :stat/defense 75, :pokemon/name "Lickitung", :stat/sp-attack 60, :pokemon/type ["Normal"]}
+ {:stat/hp 40, :stat/attack 65, :stat/speed 35, :pokemon/number "109", :stat/sp-defense 45, :stat/defense 95, :pokemon/name "Koffing", :stat/sp-attack 60, :pokemon/type ["Poison"]}
+ {:stat/hp 65, :stat/attack 90, :stat/speed 60, :pokemon/number "110", :stat/sp-defense 70, :stat/defense 120, :pokemon/name "Weezing", :stat/sp-attack 85, :pokemon/type ["Poison"]}
+ {:stat/hp 80, :stat/attack 85, :stat/speed 25, :pokemon/number "111", :stat/sp-defense 30, :stat/defense 95, :pokemon/name "Rhyhorn", :stat/sp-attack 30, :pokemon/type ["Ground" "Rock"]}
+ {:stat/hp 105, :stat/attack 130, :stat/speed 40, :pokemon/number "112", :stat/sp-defense 45, :stat/defense 120, :pokemon/name "Rhydon", :stat/sp-attack 45, :pokemon/type ["Ground" "Rock"]}
+ {:stat/hp 250, :stat/attack 5, :stat/speed 50, :pokemon/number "113", :stat/sp-defense 105, :stat/defense 5, :pokemon/name "Chansey", :stat/sp-attack 35, :pokemon/type ["Normal"]}
+ {:stat/hp 65, :stat/attack 55, :stat/speed 60, :pokemon/number "114", :stat/sp-defense 40, :stat/defense 115, :pokemon/name "Tangela", :stat/sp-attack 100, :pokemon/type ["Grass"]}
+ {:stat/hp 105, :stat/attack 95, :stat/speed 90, :pokemon/number "115", :stat/sp-defense 80, :stat/defense 80, :pokemon/name "Kangaskhan", :stat/sp-attack 40, :pokemon/type ["Normal"]}
+ {:stat/hp 30, :stat/attack 40, :stat/speed 60, :pokemon/number "116", :stat/sp-defense 25, :stat/defense 70, :pokemon/name "Horsea", :stat/sp-attack 70, :pokemon/type ["Water"]}
+ {:stat/hp 55, :stat/attack 65, :stat/speed 85, :pokemon/number "117", :stat/sp-defense 45, :stat/defense 95, :pokemon/name "Seadra", :stat/sp-attack 95, :pokemon/type ["Water"]}
+ {:stat/hp 45, :stat/attack 67, :stat/speed 63, :pokemon/number "118", :stat/sp-defense 50, :stat/defense 60, :pokemon/name "Goldeen", :stat/sp-attack 35, :pokemon/type ["Water"]}
+ {:stat/hp 80, :stat/attack 92, :stat/speed 68, :pokemon/number "119", :stat/sp-defense 80, :stat/defense 65, :pokemon/name "Seaking", :stat/sp-attack 65, :pokemon/type ["Water"]}
+ {:stat/hp 30, :stat/attack 45, :stat/speed 85, :pokemon/number "120", :stat/sp-defense 55, :stat/defense 55, :pokemon/name "Staryu", :stat/sp-attack 70, :pokemon/type ["Water"]}
+ {:stat/hp 60, :stat/attack 75, :stat/speed 115, :pokemon/number "121", :stat/sp-defense 85, :stat/defense 85, :pokemon/name "Starmie", :stat/sp-attack 100, :pokemon/type ["Water" "Psychic"]}
+ {:stat/hp 40, :stat/attack 45, :stat/speed 90, :pokemon/number "122", :stat/sp-defense 120, :stat/defense 65, :pokemon/name "Mr. Mime", :stat/sp-attack 100, :pokemon/type ["Psychic" "Fairy"]}
+ {:stat/hp 70, :stat/attack 110, :stat/speed 105, :pokemon/number "123", :stat/sp-defense 80, :stat/defense 80, :pokemon/name "Scyther", :stat/sp-attack 55, :pokemon/type ["Bug" "Flying"]}
+ {:stat/hp 65, :stat/attack 50, :stat/speed 95, :pokemon/number "124", :stat/sp-defense 95, :stat/defense 35, :pokemon/name "Jynx", :stat/sp-attack 115, :pokemon/type ["Ice" "Psychic"]}
+ {:stat/hp 65, :stat/attack 83, :stat/speed 105, :pokemon/number "125", :stat/sp-defense 85, :stat/defense 57, :pokemon/name "Electabuzz", :stat/sp-attack 95, :pokemon/type ["Electric"]}
+ {:stat/hp 65, :stat/attack 95, :stat/speed 93, :pokemon/number "126", :stat/sp-defense 85, :stat/defense 57, :pokemon/name "Magmar", :stat/sp-attack 100, :pokemon/type ["Fire"]}
+ {:stat/hp 65, :stat/attack 125, :stat/speed 85, :pokemon/number "127", :stat/sp-defense 70, :stat/defense 100, :pokemon/name "Pinsir", :stat/sp-attack 55, :pokemon/type ["Bug"]}
+ {:stat/hp 75, :stat/attack 100, :stat/speed 110, :pokemon/number "128", :stat/sp-defense 70, :stat/defense 95, :pokemon/name "Tauros", :stat/sp-attack 40, :pokemon/type ["Normal"]}
+ {:stat/hp 20, :stat/attack 10, :stat/speed 80, :pokemon/number "129", :stat/sp-defense 20, :stat/defense 55, :pokemon/name "Magikarp", :stat/sp-attack 15, :pokemon/type ["Water"]}
+ {:stat/hp 95, :stat/attack 125, :stat/speed 81, :pokemon/number "130", :stat/sp-defense 100, :stat/defense 79, :pokemon/name "Gyarados", :stat/sp-attack 60, :pokemon/type ["Water" "Flying"]}
+ {:stat/hp 130, :stat/attack 85, :stat/speed 60, :pokemon/number "131", :stat/sp-defense 95, :stat/defense 80, :pokemon/name "Lapras", :stat/sp-attack 85, :pokemon/type ["Water" "Ice"]}
+ {:stat/hp 48, :stat/attack 48, :stat/speed 48, :pokemon/number "132", :stat/sp-defense 48, :stat/defense 48, :pokemon/name "Ditto", :stat/sp-attack 48, :pokemon/type ["Normal"]}
+ {:stat/hp 55, :stat/attack 55, :stat/speed 55, :pokemon/number "133", :stat/sp-defense 65, :stat/defense 50, :pokemon/name "Eevee", :stat/sp-attack 45, :pokemon/type ["Normal"]}
+ {:stat/hp 130, :stat/attack 65, :stat/speed 65, :pokemon/number "134", :stat/sp-defense 95, :stat/defense 60, :pokemon/name "Vaporeon", :stat/sp-attack 110, :pokemon/type ["Water"]}
+ {:stat/hp 65, :stat/attack 65, :stat/speed 130, :pokemon/number "135", :stat/sp-defense 95, :stat/defense 60, :pokemon/name "Jolteon", :stat/sp-attack 110, :pokemon/type ["Electric"]}
+ {:stat/hp 65, :stat/attack 130, :stat/speed 65, :pokemon/number "136", :stat/sp-defense 110, :stat/defense 60, :pokemon/name "Flareon", :stat/sp-attack 95, :pokemon/type ["Fire"]}
+ {:stat/hp 65, :stat/attack 60, :stat/speed 40, :pokemon/number "137", :stat/sp-defense 75, :stat/defense 70, :pokemon/name "Porygon", :stat/sp-attack 85, :pokemon/type ["Normal"]}
+ {:stat/hp 35, :stat/attack 40, :stat/speed 35, :pokemon/number "138", :stat/sp-defense 55, :stat/defense 100, :pokemon/name "Omanyte", :stat/sp-attack 90, :pokemon/type ["Rock" "Water"]}
+ {:stat/hp 70, :stat/attack 60, :stat/speed 55, :pokemon/number "139", :stat/sp-defense 70, :stat/defense 125, :pokemon/name "Omastar", :stat/sp-attack 115, :pokemon/type ["Rock" "Water"]}
+ {:stat/hp 30, :stat/attack 80, :stat/speed 55, :pokemon/number "140", :stat/sp-defense 45, :stat/defense 90, :pokemon/name "Kabuto", :stat/sp-attack 55, :pokemon/type ["Rock" "Water"]}
+ {:stat/hp 60, :stat/attack 115, :stat/speed 80, :pokemon/number "141", :stat/sp-defense 70, :stat/defense 105, :pokemon/name "Kabutops", :stat/sp-attack 65, :pokemon/type ["Rock" "Water"]}
+ {:stat/hp 80, :stat/attack 105, :stat/speed 130, :pokemon/number "142", :stat/sp-defense 75, :stat/defense 65, :pokemon/name "Aerodactyl", :stat/sp-attack 60, :pokemon/type ["Rock" "Flying"]}
+ {:stat/hp 160, :stat/attack 110, :stat/speed 30, :pokemon/number "143", :stat/sp-defense 110, :stat/defense 65, :pokemon/name "Snorlax", :stat/sp-attack 65, :pokemon/type ["Normal"]}
+ {:stat/hp 90, :stat/attack 85, :stat/speed 85, :pokemon/number "144", :stat/sp-defense 125, :stat/defense 100, :pokemon/name "Articuno", :stat/sp-attack 95, :pokemon/type ["Ice" "Flying"]}
+ {:stat/hp 90, :stat/attack 90, :stat/speed 100, :pokemon/number "145", :stat/sp-defense 90, :stat/defense 85, :pokemon/name "Zapdos", :stat/sp-attack 125, :pokemon/type ["Electric" "Flying"]}
+ {:stat/hp 90, :stat/attack 100, :stat/speed 90, :pokemon/number "146", :stat/sp-defense 85, :stat/defense 90, :pokemon/name "Moltres", :stat/sp-attack 125, :pokemon/type ["Fire" "Flying"]}
+ {:stat/hp 41, :stat/attack 64, :stat/speed 50, :pokemon/number "147", :stat/sp-defense 50, :stat/defense 45, :pokemon/name "Dratini", :stat/sp-attack 50, :pokemon/type ["Dragon"]}
+ {:stat/hp 61, :stat/attack 84, :stat/speed 70, :pokemon/number "148", :stat/sp-defense 70, :stat/defense 65, :pokemon/name "Dragonair", :stat/sp-attack 70, :pokemon/type ["Dragon"]}
+ {:stat/hp 91, :stat/attack 134, :stat/speed 80, :pokemon/number "149", :stat/sp-defense 100, :stat/defense 95, :pokemon/name "Dragonite", :stat/sp-attack 100, :pokemon/type ["Dragon" "Flying"]}
+ {:stat/hp 106, :stat/attack 110, :stat/speed 130, :pokemon/number "150", :stat/sp-defense 90, :stat/defense 90, :pokemon/name "Mewtwo", :stat/sp-attack 154, :pokemon/type ["Psychic"]}
+ {:stat/hp 100, :stat/attack 100, :stat/speed 100, :pokemon/number "151", :stat/sp-defense 100, :stat/defense 100, :pokemon/name "Mew", :stat/sp-attack 100, :pokemon/type ["Psychic"]}]
