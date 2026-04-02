@@ -7,14 +7,15 @@ html * {
 }
 
 body {
-    margin: 0;
-    font: 400 14px 'Inter', sans-serif;
     letter-spacing: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -moz-font-feature-settings: "liga" on;
-    line-height: 1.4;
-    text-rendering: optimizeLegibility;
-    width: 100vw;
+    font-feature-settings: "liga" on;
+    text-rendering: optimizelegibility;
+    max-width: 1000px;
     min-height: 100vh;
+    margin: 0 auto;
+    font:
+        400 14px / 1.4 Inter,
+        sans-serif;
 }
