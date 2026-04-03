@@ -4,7 +4,8 @@
         hiccup/hiccup {:mvn/version "2.0.0"}
         com.datomic/peer {:mvn/version "1.0.7187"}
         org.clojure/data.json {:mvn/version "2.5.1"}
-        org.clojure/data.csv {:mvn/version "1.1.0"}}
+        org.clojure/data.csv {:mvn/version "1.1.0"}
+        org.slf4j/slf4j-nop {:mvn/version "2.0.17"}}
  :paths ["src" "resources"]
  :aliases {:build {:deps {io.github.clojure/tools.build {:git/tag "v0.9.6" :git/sha "8e78bcc"}}
                    :ns-default build}}}
