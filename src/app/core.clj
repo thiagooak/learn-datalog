@@ -7,7 +7,6 @@
             [hiccup2.core :as h]
             [hiccup.page :as p]
             [app.db]
-            [clojure.edn :as edn]
             [clojure.data.json :as json])
   (:gen-class))
 
@@ -33,26 +32,35 @@
   (let [random-name (int (* 100 (rand)))
         input-name  (str "in" random-name)
         output-name (str "out" random-name)]
-    [:form {(str "data-signals:" output-name) "'...'"
-           (str "data-signals:" input-name) (str \' input \')}
-    [:textarea {:name input-name
-                :class "input"
-                "data-bind" input-name
-                :style {:height "200px" :width "300px"}}]
-    [:button {"data-on:click" "@post('/api/q', {contentType: 'form'})"} "run"]
-    [:textarea {:name output-name
-                :class "output"
-                "data-text" (str "$" output-name)
-                :style {:height "200px" :width "300px"}}]]))
+    [:form
+     [:textarea {:name input-name
+                 :class "input"
+                 "data-bind" input-name
+                 :spellcheck false}
+      input]
+     [:textarea {:name output-name
+                 :class "output"
+                 :readonly "readonly"
+                 :spellcheck false
+                 "data-text" (str "$" output-name)}]
+     [:div
+      [:button {"data-on:click" "@post('/api/q', {contentType: 'form'})"
+                :style {:margin "5px"}}
+       "Run"]
+      [:button {"data-on:click__prevent" (str "$" input-name "='@TODO'")
+                :style {:margin "5px"}}
+       "Reset"]]]))
 
 (defn content-home []
   [:div [:p "This interactive website will help you learn how to query a Datomic databases using Datalog."]
-  [:p "Let’s start with a query that returns the names of all grass type pokemon."]
-  (runnable "[:find ?name :where [?entity :pokemon/type \"Grass\"] [?entity :pokemon/name ?name]]")
-  [:p "You can edit the query above to find other types like Fire or Electric."]
-  [:h2 "Data model"]
-  [:p "Below we have one vector that contains three of the maps that we used to populate our database."]
-  [:pre [:code "[{:pokemon/name    \"Bulbasaur\",
+   [:p "Let’s start with a query that returns the names of all grass type pokemon."]
+   (runnable "[:find ?name
+ :where [?entity :pokemon/type \"Grass\"]
+        [?entity :pokemon/name ?name]]")
+   [:p "You can edit the query above to find other types like Fire or Electric."]
+   [:h2 "Data model"]
+   [:p "Below we have one vector that contains three of the maps that we used to populate our database."]
+   [:pre [:code "[{:pokemon/name    \"Bulbasaur\",
   :pokemon/number  \"001\",
   :pokemon/type    [\"Grass\" \"Poison\"],
   :stat/attack     49,
@@ -82,12 +90,23 @@
   :stat/sp-defense 100,
   :stat/speed      80}]"]]
 
-  [:p "You can find the full list here https://github.com/thiagooak/learn-datalog/blob/main/resources/pokemon.edn#L34"]
-  [:p "Each map represents one Pokemon Entity and defines various Attributes with their respective Values."]
-  [:p "It is important to understand what EAV (Entity, Attribute, Value) represents when working with Datomic, so let's run some queries to make it more concrete."]
-  (runnable "[:find ?entity :where [?entity :pokemon/name \"Ivysaur\"]]")
+   [:p "You can find the full list here https://github.com/thiagooak/learn-datalog/blob/main/resources/pokemon.edn#L34"]
+   [:p "Each map represents one Pokemon Entity and defines various Attributes with their respective Values."]
+   [:p "It is important to understand what EAV (Entity, Attribute, Value) represents when working with Datomic, so let's run some queries to make it more concrete."]
+   (runnable "[:find ?entity-id
+ :where [?entity-id :pokemon/name \"Ivysaur\"]]")
+   [:p "The query above returns the entity id of the entity representing the pokemon."]
+   [:p "Now let's list all of the attributes associated with that entity and their values"]
+   (runnable "[:find ?attribute-id ?value
+ :where [?entity-id :pokemon/name \"Ivysaur\"]
+        [?entity-id ?attribute-id ?value]]")
+   [:p "Notice that we got the attibute ids and their values, let's update the query to get the attribute names instead"]
+   (runnable "[:find ?attribute ?value
+ :where [?entity-id :pokemon/name \"Ivysaur\"]
+        [?entity-id ?attribute-id ?value]
+        [?attribute-id :db/ident ?attribute]]")
   ;; universal schema (https://docs.datomic.com/whatis/data-model.html#universal)
-  ])
+   ])
 
 (defn page-home []
   (page "Learn Datalog" [:div [:h1 "Learn Datalog"]
