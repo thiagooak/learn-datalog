@@ -14,8 +14,10 @@
    [:body children
     [:script {:type "module" :src "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"}]]])
 
+(def runnable-counter (atom 0))
+
 (defn runnable [input]
-  (let [random-name (int (* 100 (rand)))
+  (let [random-name (swap! runnable-counter inc)
         input-name  (str "in" random-name)
         output-name (str "out" random-name)]
     [:form
