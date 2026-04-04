@@ -35,8 +35,9 @@
        :body (json/write-str {out-name
                               (-> in
                                   (run-q)
-                                  (pprint)
-                                  (with-out-str))})}))
+                                  (str)
+                                  #_(pprint)
+                                  #_(with-out-str))})}))
   (GET "/" _
     {:status 200
      :headers {"Content-Type" "text/html"}

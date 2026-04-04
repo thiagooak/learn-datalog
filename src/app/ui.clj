@@ -37,6 +37,8 @@
      [:syntax-highlight {:language "clojure"
                          :name output-name
                          :class "output"
+                         "data-on-signal-patch" "console.log('maybe update here'); console.log(el);"
+                         "data-on-signal-patch-filter" (str "{include: /^" output-name "$/}")
                          "data-text" (str "$" output-name)}]
      [:div
       [:button {"data-on:click__prevent" (str "@post('/api/q', {filterSignals: {include: /^" input-name "|" output-name "$/}})")
