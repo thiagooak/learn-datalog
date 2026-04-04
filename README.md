@@ -2,7 +2,7 @@
 
 ## Development
 ```shell
-clojure -M -m app.core # or run the server from REPL
+clojure -M -m app.core
 ```
 
 ## Deployment
