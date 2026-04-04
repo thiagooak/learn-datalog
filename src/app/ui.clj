@@ -29,7 +29,9 @@
                          :contenteditable "true"
                          :class "input"
                          :spellcheck "false"
-                         "data-on:input" (str "$" input-name " = el.contentElement.innerText; el.update();")}
+                         ;; adding new lines breaks the syntax highlight
+                         "data-on:keyup__debounce.500ms" "try { el.update(); } catch (error) { console.error(error.message); }"
+                         "data-on:input" (str "$" input-name " = el.contentElement.innerText")}
       (with-out-str (pprint input))]
 
      [:syntax-highlight {:language "clojure"
