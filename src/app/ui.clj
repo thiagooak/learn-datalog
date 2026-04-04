@@ -1,4 +1,5 @@
-(ns app.ui)
+(ns app.ui
+  (:require [clojure.pprint :refer [pprint]]))
 
 (defn page [title children]
   [:html
@@ -21,17 +22,17 @@
      [:textarea {:name input-name
                  :class "input"
                  "data-bind" input-name
-                 :spellcheck false}
-      input]
+                 :spellcheck "false"}
+      (with-out-str (pprint input))]
      [:textarea {:name output-name
                  :class "output"
                  :readonly "readonly"
-                 :spellcheck false
+                 :spellcheck "false"
                  "data-text" (str "$" output-name)}]
      [:div
       [:button {"data-on:click" "@post('/api/q', {contentType: 'form'})"
                 :style {:margin "5px"}}
        "Run"]
-      [:button {"data-on:click__prevent" (str "$" input-name "='@TODO'")
+      [:button {"data-on:click__prevent" (str "$" output-name "=''")
                 :style {:margin "5px"}}
        "Reset"]]]))

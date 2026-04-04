@@ -1,15 +1,16 @@
 (ns app.core
   (:require [org.httpkit.server :as http]
+            [ring.middleware.params :refer [wrap-params]]
             [compojure.core :refer [defroutes GET POST]]
             [compojure.route :as route]
-            [ring.middleware.params :refer [wrap-params]]
+            [clojure.data.json :as json]
+            [clojure.pprint :refer [pprint]]
             [datomic.api :as d]
             [hiccup2.core :as h]
             [hiccup.page :as p]
             [app.db]
             [app.ui]
-            [app.content]
-            [clojure.data.json :as json])
+            [app.content])
   (:gen-class))
 
 (defn run-q [q]
@@ -17,7 +18,7 @@
     (app.db/setup-db conn)
     ;; running arbitrary user generated code
     ;; directly in the database is pretty safe, right?
-    (str (d/q q (d/db conn)))))
+    (d/q q (d/db conn))))
 
 (defroutes routes
   ;; In a real system, you would serve static files from a CDN
@@ -30,7 +31,11 @@
           out-name (second (keys (:params req)))]
       {:status 200
        :headers {"Content-Type" "application/json"}
-       :body (json/write-str {out-name (run-q in)})}))
+       :body (json/write-str {out-name
+                              (-> in
+                                  (run-q)
+                                  (pprint)
+                                  (with-out-str))})}))
   (GET "/" _
     {:status 200
      :headers {"Content-Type" "text/html"}
