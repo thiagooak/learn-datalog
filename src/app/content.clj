@@ -13,36 +13,37 @@
    [:p "You can edit the query above to find other types like Fire or Electric."]
    [:h2 "Data model"]
    [:p "Below we have one vector that contains three of the maps that we used to populate our database."]
-   [:pre [:code (with-out-str
-                  (pprint [{:pokemon/name    "Bulbasaur",
-                            :pokemon/number  "001",
-                            :pokemon/type    ["Grass" "Poison"],
-                            :stat/attack     49,
-                            :stat/defense    49,
-                            :stat/hp         45,
-                            :stat/sp-attack  65,
-                            :stat/sp-defense 65,
-                            :stat/speed      45}
+   [:syntax-highlight {:language "clojure"}
+    (with-out-str
+      (pprint [{:pokemon/name    "Bulbasaur",
+                :pokemon/number  "001",
+                :pokemon/type    ["Grass" "Poison"],
+                :stat/attack     49,
+                :stat/defense    49,
+                :stat/hp         45,
+                :stat/sp-attack  65,
+                :stat/sp-defense 65,
+                :stat/speed      45}
 
-                           {:pokemon/name    "Ivysaur",
-                            :pokemon/number  "002",
-                            :pokemon/type    ["Grass" "Poison"],
-                            :stat/attack     62,
-                            :stat/defense    63,
-                            :stat/hp         60,
-                            :stat/sp-attack  80,
-                            :stat/sp-defense 80,
-                            :stat/speed      60}
+               {:pokemon/name    "Ivysaur",
+                :pokemon/number  "002",
+                :pokemon/type    ["Grass" "Poison"],
+                :stat/attack     62,
+                :stat/defense    63,
+                :stat/hp         60,
+                :stat/sp-attack  80,
+                :stat/sp-defense 80,
+                :stat/speed      60}
 
-                           {:pokemon/name    "Venusaur",
-                            :pokemon/number  "003",
-                            :pokemon/type    ["Grass" "Poison"],
-                            :stat/attack     82,
-                            :stat/defense    83,
-                            :stat/hp         80,
-                            :stat/sp-attack  100,
-                            :stat/sp-defense 100,
-                            :stat/speed      80}]))]]
+               {:pokemon/name    "Venusaur",
+                :pokemon/number  "003",
+                :pokemon/type    ["Grass" "Poison"],
+                :stat/attack     82,
+                :stat/defense    83,
+                :stat/hp         80,
+                :stat/sp-attack  100,
+                :stat/sp-defense 100,
+                :stat/speed      80}]))]
    [:p "You can find the full list here https://github.com/thiagooak/learn-datalog/blob/main/resources/pokemon.edn#L34"]
    [:p "Each map represents one Pokemon Entity and defines various Attributes with their respective Values."]
    [:p "It is important to understand what EAV (Entity, Attribute, Value) represents when working with Datomic, so let's run some queries to make it more concrete."]

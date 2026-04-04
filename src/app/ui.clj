@@ -10,8 +10,11 @@
     [:link {:rel :preconnect :href "https://fonts.googleapis.com"}]
     [:link {:rel :preconnect :href "https://fonts.gstatic.com" :crossorigin true}]
     [:link {:rel :stylesheet :href "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"}]
+    [:link {:rel :stylesheet :href "https://cdn.jsdelivr.net/npm/syntax-highlight-element@1/dist/themes/prettylights.min.css"}]
     [:link {:rel :stylesheet :href "/main.css"}]]
    [:body children
+    [:script {:type "module" :src "https://cdn.jsdelivr.net/npm/syntax-highlight-element@1/+esm"}]
+    [:script {:src "/syntax-highlight-config.js"}]
     [:script {:type "module" :src "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"}]]])
 
 (def runnable-counter (atom 0))
@@ -20,19 +23,21 @@
   (let [random-name (swap! runnable-counter inc)
         input-name  (str "in" random-name)
         output-name (str "out" random-name)]
-    [:form
-     [:textarea {:name input-name
-                 :class "input"
-                 "data-bind" input-name
-                 :spellcheck "false"}
+
+    [:div {(str "data-signals:" input-name) (str "'" input "'")}
+     [:syntax-highlight {:language "clojure"
+                         :contenteditable "true"
+                         :class "input"
+                         :spellcheck "false"
+                         "data-on:input" (str "$" input-name " = el.contentElement.innerText; el.update();")}
       (with-out-str (pprint input))]
-     [:textarea {:name output-name
-                 :class "output"
-                 :readonly "readonly"
-                 :spellcheck "false"
-                 "data-text" (str "$" output-name)}]
+
+     [:syntax-highlight {:language "clojure"
+                         :name output-name
+                         :class "output"
+                         "data-text" (str "$" output-name)}]
      [:div
-      [:button {"data-on:click" "@post('/api/q', {contentType: 'form'})"
+      [:button {"data-on:click__prevent" (str "@post('/api/q', {filterSignals: {include: /^" input-name "|" output-name "$/}})")
                 :style {:margin "5px"}}
        "Run"]
       [:button {"data-on:click__prevent" (str "$" output-name "=''")

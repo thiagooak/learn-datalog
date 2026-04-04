@@ -26,9 +26,10 @@
   ;; Api routes
   (POST "/api/q" req
     ;; do not rely on first and second
-    (let [in-name (first (keys (:params req)))
-          in  (get-in req [:params in-name])
-          out-name (second (keys (:params req)))]
+    (let [body (json/read-str (slurp (:body req)))
+          in-name (first (keys body))
+          in  (get-in body [in-name])
+          out-name (second (keys body))]
       {:status 200
        :headers {"Content-Type" "application/json"}
        :body (json/write-str {out-name
