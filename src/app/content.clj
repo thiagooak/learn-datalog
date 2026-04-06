@@ -6,58 +6,54 @@
   [:div
    [:h1 "Learn Datalog"]
    [:p "This interactive website will help you learn how to query a Datomic databases using Datalog."]
-   [:p "Let’s start with a query that returns the names of all grass type pokemon."]
+   [:p "Click the \"Run\" button below the code block to run your first Datalog query."]
    (app.ui/runnable [:find '?name :where
                      ['?entity :pokemon/type "Grass"]
                      ['?entity :pokemon/name '?name]])
-   [:p "You can edit the query above to find other types like Fire or Electric."]
-   [:h2 "Data model"]
-   [:p "Below we have one vector that contains three of the maps that we used to populate our database."]
+   [:p "Try editing the query above to return Pokemon of other types like Fire or Electric."]
+   #_[:h2 "Data model"]
+   [:p "Before we continue querying the database, let's take a look at our data model."]
    [:syntax-highlight {:language "clojure"}
     (with-out-str
-      (pprint [{:pokemon/name    "Bulbasaur",
-                :pokemon/number  "001",
-                :pokemon/type    ["Grass" "Poison"],
-                :stat/attack     49,
-                :stat/defense    49,
-                :stat/hp         45,
-                :stat/sp-attack  65,
-                :stat/sp-defense 65,
-                :stat/speed      45}
-
-               {:pokemon/name    "Ivysaur",
-                :pokemon/number  "002",
-                :pokemon/type    ["Grass" "Poison"],
-                :stat/attack     62,
-                :stat/defense    63,
-                :stat/hp         60,
-                :stat/sp-attack  80,
-                :stat/sp-defense 80,
-                :stat/speed      60}
-
-               {:pokemon/name    "Venusaur",
-                :pokemon/number  "003",
-                :pokemon/type    ["Grass" "Poison"],
-                :stat/attack     82,
-                :stat/defense    83,
-                :stat/hp         80,
-                :stat/sp-attack  100,
-                :stat/sp-defense 100,
-                :stat/speed      80}]))]
-   [:p "You can find the full list here https://github.com/thiagooak/learn-datalog/blob/main/resources/pokemon.edn#L34"]
-   [:p "Each map represents one Pokemon Entity and defines various Attributes with their respective Values."]
-   [:p "It is important to understand what EAV (Entity, Attribute, Value) represents when working with Datomic, so let's run some queries to make it more concrete."]
+      (pprint {:pokemon/name    "Bulbasaur",
+               :pokemon/number  "001",
+               :pokemon/type    ["Grass" "Poison"],
+               :stat/attack     49,
+               :stat/defense    49,
+               :stat/hp         45,
+               :stat/sp-attack  65,
+               :stat/sp-defense 65,
+               :stat/speed      45}))]
+   [:p "The map above represents one Pokemon Entity. Each key of the map (:stat/speed, :pokemon/number, :pokemon/name, etc) represents one Attribute and each value of the map (45, \"001\", \"Bulbasaur\", etc) represents one or more Values."]
+   #_[:p "It is important to understand the EAV (Entity, Attribute, Value) structure as we use it to contruct our Datalog queries."]
+   [:p "Each Entity has an entity-id. Let's find \"Bulbasaur\"'s entity-id"]
    (app.ui/runnable [:find '?entity-id
-                     :where ['?entity-id :pokemon/name "Ivysaur"]])
-   [:p "The query above returns the entity id of the entity representing the pokemon."]
-   [:p "Now let's list all of the attributes associated with that entity and their values"]
-   (app.ui/runnable [:find '?attribute-id '?value
-                     :where ['?entity-id :pokemon/name "Ivysaur"]
-                     ['?entity-id '?attribute-id '?value]])
-   [:p "Notice that we got the attibute ids and their values, let's update the query to get the attribute names instead"]
+                     :where ['?entity-id :pokemon/name "Bulbasaur"]])
+   [:p "Now let's list all of the Attributes associated with \"Bulbasaur\""]
+   (app.ui/runnable [:find '?attribute
+                     :where
+                     ['?entity-id :pokemon/name "Bulbasaur"]
+                     ['?entity-id '?attribute-id '_]
+                     ['?attribute-id :db/ident '?attribute]])
+   [:p "Finally, let's list all of the Attributes and values associated with \"Bulbasaur\""]
    (app.ui/runnable [:find '?attribute '?value
-                     :where ['?entity-id :pokemon/name "Ivysaur"]
+                     :where
+                     ['?entity-id :pokemon/name "Bulbasaur"]
                      ['?entity-id '?attribute-id '?value]
                      ['?attribute-id :db/ident '?attribute]])
-  ;; universal schema (https://docs.datomic.com/whatis/data-model.html#universal)
+   [:p "Read Datomic's "
+    [:a {:href "https://docs.datomic.com/whatis/data-model.html#universal"} "Universal Schema"] " documentation to learn more about Datomic's data model"]
+   [:p "Take a look at the "
+    [:a {:href "https://github.com/thiagooak/learn-datalog/blob/main/resources/pokemon.edn#L34"} "file"]
+    " defining all of the Pokemon in our database."]
+   [:h2 "Querying"]
+   (app.ui/runnable '[:find ?name ?type :where
+                     (not [?entity :pokemon/type "Grass"])
+                     [?entity :pokemon/name ?name]
+                     [?entity :pokemon/type ?type]])
+
+   (app.ui/runnable '[:find ?name ?speed :where
+                      [?entity :pokemon/name ?name]
+                      [?entity :stat/speed ?speed]
+                      [(> ?speed 80)]])
    ])
