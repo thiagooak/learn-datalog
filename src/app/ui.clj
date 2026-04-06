@@ -25,7 +25,7 @@
         output-name (str "out" random-name)]
 
     [:div {(str "data-signals:" input-name) (str "'" input "'")
-           (str "data-signals:" output-name) (str "',,,'")}
+           (str "data-signals:" output-name) "',,,'"}
      [:syntax-highlight {:language "clojure"
                          :contenteditable "true"
                          :class "input"
@@ -40,7 +40,7 @@
       [:button {"data-on:click__prevent" (str "@post('/api/q', {filterSignals: {include: /^" input-name "|" output-name "$/}})")
                 :style {:margin "5px"}}
        "Run"]
-      [:button {"data-on:click__prevent" (str "$" output-name "=''")
+      [:button {"data-on:click__prevent" (str "$" output-name " = ',,,'")
                 :style {:margin "5px"}}
        "Reset"]]
 
