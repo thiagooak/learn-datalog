@@ -24,13 +24,15 @@
         input-name  (str "in" random-name)
         output-name (str "out" random-name)]
 
-    [:div {(str "data-signals:" input-name) (str "'" input "'")}
+    [:div {(str "data-signals:" input-name) (str "'" input "'")
+           (str "data-signals:" output-name) (str "',,,'")}
      [:syntax-highlight {:language "clojure"
                          :contenteditable "true"
                          :class "input"
                          :spellcheck "false"
                          ;; adding new lines breaks the syntax highlight
-                         "data-on:keyup__debounce.500ms" "try { el.update(); } catch (error) { console.error(error.message); }"
+                         "data-on-signal-patch" "el.update()"
+                         "data-on-signal-patch-filter" (str "{include: /^" input-name "$/}")
                          "data-on:input" (str "$" input-name " = el.contentElement.innerText")}
       (with-out-str (pprint input))]
 
@@ -45,6 +47,6 @@
      [:syntax-highlight {:language "clojure"
                          :name output-name
                          :class "output"
-                         "data-on-signal-patch" "console.log('maybe update here'); console.log(el);"
+                         "data-on-signal-patch" "el.update()"
                          "data-on-signal-patch-filter" (str "{include: /^" output-name "$/}")
                          "data-text" (str "$" output-name)}]]))
