@@ -5,6 +5,7 @@
             [compojure.route :as route]
             [clojure.data.json :as json]
             [clojure.pprint :refer [pprint]]
+            [clojure.edn :as edn]
             [datomic.api :as d]
             [hiccup2.core :as h]
             [hiccup.page :as p]
@@ -13,12 +14,30 @@
             [app.content])
   (:gen-class))
 
+(defn find-fns [form]
+  (cond
+    (seq? form)
+    (let [head (first form)
+          called (when (symbol? head) #{head})]
+      (into (or called #{})
+            (mapcat find-fns form)))
+
+    (coll? form)
+    (into #{} (mapcat find-fns form))
+
+    :else #{}))
+
+(defn safe-q? [q]
+  (let [allowed-fns #{'- '* '/ '+ '< '<= '= '> '>= 'count 'not'not= }]
+    (every? allowed-fns (find-fns (edn/read-string q)))))
+
 (defn run-q [q]
+  (when-not (safe-q? q) (throw (Exception. "Unsafe Query")))
   (let [conn (app.db/scratch-conn)]
-    (app.db/setup-db conn)
-    ;; running arbitrary user generated code
-    ;; directly in the database is pretty safe, right?
-    (d/q q (d/db conn))))
+   (app.db/setup-db conn)
+   (d/query {:query q
+             :timeout 500
+             :args [(d/db conn)]})))
 
 (defroutes routes
   ;; In a real system, you would serve static files from a CDN
@@ -35,9 +54,8 @@
        :body (json/write-str {out-name
                               (-> in
                                   (run-q)
-                                  (str)
-                                  #_(pprint)
-                                  #_(with-out-str))})}))
+                                  (pprint)
+                                  (with-out-str))})}))
   (GET "/" _
     {:status 200
      :headers {"Content-Type" "text/html"}

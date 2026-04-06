@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__clojure__clojure_inspect_project",
+      "mcp__clojure__glob_files",
+      "mcp__clojure__bash",
+      "mcp__clojure__read_file"
+    ]
+  }
+}
