@@ -2,7 +2,11 @@
 
 ## Development
 ```shell
-clojure -M -m app.core
+clojure -X:run
+```
+Run tests
+```shell
+clojure -X:test
 ```
 
 ## Deployment

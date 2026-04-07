@@ -27,7 +27,7 @@
     [:div {(str "data-signals:" input-name) (str "'" input "'")
            (str "data-signals:" output-name) "',,,'"}
      [:syntax-highlight {:language "clojure"
-                         :contenteditable "true"
+                         :contenteditable "plaintext-only"
                          :class "input"
                          :spellcheck "false"
                          ;; adding new lines breaks the syntax highlight
