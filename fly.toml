@@ -8,7 +8,7 @@ kill_timeout = "5s"
 
 [http_service]
   force_https = true
-  auto_stop_machines = "suspend"
+  auto_stop_machines = "off"
   auto_start_machines = false
   min_machines_running = 1
   [http_service.concurrency]
