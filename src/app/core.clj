@@ -28,7 +28,7 @@
     :else #{}))
 
 (defn safe-q? [q]
-  (let [allowed-fns #{'- '* '/ '+ '< '<= '= '> '>= 'count 'not'not= }]
+  (let [allowed-fns #{'- '* '/ '+ '< '<= '= '> '>= 'count 'not 'not=}]
     (every? allowed-fns (find-fns (edn/read-string q)))))
 
 (defn run-q [q]
