@@ -13,7 +13,7 @@
    [:p "Try editing the query above to return Pokemon of other types like Fire or Electric."]
    #_[:h2 "Data model"]
    [:p "Before we continue querying the database, let's take a look at our data model."]
-   [:syntax-highlight {:language "clojure"}
+   [:code-highlighter {:language "clojure"}
     (with-out-str
       (pprint {:pokemon/name    "Bulbasaur",
                :pokemon/number  "001",
