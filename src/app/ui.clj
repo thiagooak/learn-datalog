@@ -10,11 +10,12 @@
     [:link {:rel :preconnect :href "https://fonts.googleapis.com"}]
     [:link {:rel :preconnect :href "https://fonts.gstatic.com" :crossorigin true}]
     [:link {:rel :stylesheet :href "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"}]
-    [:link {:rel :stylesheet :href "/rich-code.css"}]
+    [:link {:rel :stylesheet :href "https://cdn.jsdelivr.net/npm/@thiago.oak/code-highlighter@latest/prettylights.css"}]
     [:link {:rel :stylesheet :href "/main.css"}]]
    [:body children
-    [:script {:src "/prism.js" :data-manual "data-manual"}]
-    [:script {:type "module" :src "/rich-code.js"}]
+    [:script {:src "https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" :data-manual "data-manual"}]
+    [:script {:src "https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-clojure.min.js"}]
+    [:script {:type "module" :src "https://cdn.jsdelivr.net/npm/@thiago.oak/code-highlighter@latest/code-highlighter.js"}]
     [:script {:type "module" :src "https://cdn.jsdelivr.net/gh/starfederation/datastar@1.0.0-RC.8/bundles/datastar.js"}]]])
 
 (def runnable-counter (atom 0))
@@ -26,13 +27,13 @@
 
     [:div {(str "data-signals:" input-name) (str "'" input "'")
            (str "data-signals:" output-name) "',,,'"}
-    [:rich-code {:language "clojure"
-                 :contenteditable "plaintext-only"
-                 :class "input"
-                 :spellcheck "false"
-                 "data-on-signal-patch" "el.highlight()"
-                 "data-on-signal-patch-filter" (str "{include: /^" input-name "$/}")
-                 "data-on:input" (str "$" input-name " = el.innerText")}
+    [:code-highlighter {:language "clojure"
+                        :contenteditable "plaintext-only"
+                        :class "input"
+                        :spellcheck "false"
+                        "data-on-signal-patch" "el.highlight()"
+                        "data-on-signal-patch-filter" (str "{include: /^" input-name "$/}")
+                        "data-on:input" (str "$" input-name " = el.innerText")}
       (with-out-str (pprint input))]
 
      [:div
@@ -43,9 +44,9 @@
                 :style {:margin "5px"}}
        "Reset"]]
 
-     [:rich-code {:language "clojure"
-                  :name output-name
-                  :class "output"
-                  "data-on-signal-patch" "el.highlight()"
-                  "data-on-signal-patch-filter" (str "{include: /^" output-name "$/}")
-                  "data-text" (str "$" output-name)}]]))
+     [:code-highlighter {:language "clojure"
+                         :name output-name
+                         :class "output"
+                         "data-on-signal-patch" "el.highlight()"
+                         "data-on-signal-patch-filter" (str "{include: /^" output-name "$/}")
+                         "data-text" (str "$" output-name)}]]))
