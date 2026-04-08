@@ -8,9 +8,9 @@ kill_timeout = "5s"
 
 [http_service]
   force_https = true
-  auto_stop_machines = "stop"
+  auto_stop_machines = "suspend"
   auto_start_machines = false
-  min_machines_running = 0
+  min_machines_running = 1
   [http_service.concurrency]
     type = "requests"
     soft_limit = 200
