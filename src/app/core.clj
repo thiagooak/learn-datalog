@@ -60,7 +60,7 @@
     {:status 200
      :headers {"Content-Type" "text/html"}
      :body (app.ui/page
-            "Learn Datalog"
+            "Learn Datomic Datalog"
             (app.ui/nav app.content/chapters)
             (app.content/one))})
 
@@ -68,7 +68,7 @@
     {:status 200
      :headers {"Content-Type" "text/html"}
      :body (app.ui/page
-            "Learn Datalog"
+            "Learn Datomic Datalog"
             (app.ui/nav app.content/chapters)
             ((:content (get app.content/chapters chapter))))}))
 

@@ -10,6 +10,9 @@
   (b/delete {:path build-dir})
   (b/copy-dir {:src-dirs ["src" "resources"]
                :target-dir class-dir})
+  (let [sha (b/git-process {:git-args "rev-parse --short HEAD"})]
+    (b/write-file {:path (str class-dir "/version.txt")
+                   :string sha}))
   (b/compile-clj {:basis basis
                   :src-dirs ["src"]
                   :class-dir class-dir

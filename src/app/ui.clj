@@ -1,7 +1,13 @@
 (ns app.ui
   (:require [clojure.pprint :refer [pprint]]
+            [clojure.java.io :as io]
             [hiccup2.core :as h]
             [hiccup.page :as p]))
+
+(def version "Used for cache busting. build.clj creates the version.txt file"
+  (if-let [resource (io/resource "version.txt")]
+    (slurp resource)
+    "dev"))
 
 (defn nav-li [m]
   [:li [:a {:href (str "/" (key m))} (:nav-title (val m))]])
@@ -24,7 +30,7 @@
       [:link {:rel :preconnect :href "https://fonts.gstatic.com" :crossorigin true}]
       [:link {:rel :stylesheet :href "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"}]
       [:link {:rel :stylesheet :href "https://cdn.jsdelivr.net/npm/@thiago.oak/code-highlighter@latest/prettylights.css"}]
-      [:link {:rel :stylesheet :href "/main.css"}]]
+      [:link {:rel :stylesheet :href (str "/main.css?v=" version)}]]
      [:body
       nav
       [:main children]
@@ -38,7 +44,7 @@
 
 (defn runnable [dataset input]
   (let [random-name (swap! runnable-counter inc)
-        input-name  (str "in" random-name)
+        input-name (str "in" random-name)
         output-name (str "out" random-name)]
 
     [:div {(str "data-signals:" input-name) (str "'" input "'")
