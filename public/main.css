@@ -23,9 +23,37 @@ body {
     font:
         400 1em / 1.4 Inter,
         sans-serif;
+    display: flex;
 }
 
-syntax-highlight {
+nav {
+    flex: 1;
+    margin-top: 5em;
+}
+
+nav ul {
+    padding-left: 0;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+main {
+    flex: 5;
+}
+
+main table {
+    border-collapse: collapse;
+    margin-right: 1em;
+}
+
+main table td, main table th {
+    border-bottom: 1px solid;
+    padding: 4px;
+}
+
+code-highlighter {
     font-size: 0.9em;
     display: block;
 }

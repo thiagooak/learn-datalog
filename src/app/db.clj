@@ -31,7 +31,12 @@
              more)
       {:datoms n})))
 
-(defn setup-db [conn]
-  (doseq [schema ["pokemon.edn"]]
+(defn safe-dataset? [dataset]
+  (let [allowed #{"friends" "pokemon"}]
+    (contains? allowed dataset)))
+
+(defn setup-db [conn dataset]
+  (when-not (safe-dataset? dataset) (throw (Exception. "Unsafe Dataset")))
+  (doseq [schema [(str dataset ".edn")]]
     (->> (io/resource schema)
          (transact-all conn))))

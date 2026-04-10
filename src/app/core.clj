@@ -7,8 +7,6 @@
             [clojure.pprint :refer [pprint]]
             [clojure.edn :as edn]
             [datomic.api :as d]
-            [hiccup2.core :as h]
-            [hiccup.page :as p]
             [app.db]
             [app.ui]
             [app.content])
@@ -28,16 +26,16 @@
     :else #{}))
 
 (defn safe-q? [q]
-  (let [allowed-fns #{'- '* '/ '+ '< '<= '= '> '>= 'count 'not 'not=}]
+  (let [allowed-fns #{'- '* '/ '+ '< '<= '= '> '>= 'count 'not 'not= 'missing?}]
     (every? allowed-fns (find-fns (edn/read-string q)))))
 
-(defn run-q [q]
+(defn run-q [dataset q]
   (when-not (safe-q? q) (throw (Exception. "Unsafe Query")))
   (let [conn (app.db/scratch-conn)]
-   (app.db/setup-db conn)
-   (d/query {:query q
-             :timeout 500
-             :args [(d/db conn)]})))
+    (app.db/setup-db conn dataset)
+    (d/query {:query q
+              :timeout 500
+              :args [(d/db conn)]})))
 
 (defroutes routes
   ;; In a real system, you would serve static files from a CDN
@@ -48,21 +46,31 @@
     (let [body (json/read-str (slurp (:body req)))
           in-name (first (keys body))
           in  (get-in body [in-name])
-          out-name (second (keys body))]
+          out-name (second (keys body))
+          dataset (get (:query-params req) "dataset")]
+
       {:status 200
        :headers {"Content-Type" "application/json"}
        :body (json/write-str {out-name
-                              (-> in
-                                  (run-q)
+                              (->> in
+                                  (run-q dataset)
                                   (pprint)
                                   (with-out-str))})}))
   (GET "/" _
     {:status 200
      :headers {"Content-Type" "text/html"}
-     :body (str (h/html
-                 {:mode :html}
-                 (p/doctype :html5)
-                 (app.ui/page "Learn Datalog" (app.content/content-home))))}))
+     :body (app.ui/page
+            "Learn Datalog"
+            (app.ui/nav app.content/chapters)
+            (app.content/one))})
+
+  (GET "/:chapter" [chapter]
+    {:status 200
+     :headers {"Content-Type" "text/html"}
+     :body (app.ui/page
+            "Learn Datalog"
+            (app.ui/nav app.content/chapters)
+            ((:content (get app.content/chapters chapter))))}))
 
 (defn run-server [port]
   (println (str "Server is listening on: http://localhost:" port))
