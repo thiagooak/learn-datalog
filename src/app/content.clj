@@ -60,8 +60,6 @@
 
    [:p "Let's rewrite this database using Datomic."]
 
-   [:p "To start, let's define the structure of our data."]
-
    [:p "We can't use the two tables we had before. Datomic has a "
     [:a {:href "https://docs.datomic.com/whatis/data-model.html#universal"} "Universal Schema"]
     ". Think of it as one big table with five columns that stores " [:strong "everything"] " in our Database. For now, let's focus on three of the five columns."]
