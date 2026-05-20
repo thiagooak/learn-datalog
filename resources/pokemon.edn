@@ -1,4 +1,4 @@
-;; Schema
+;; Attributes
 
 [{:db/ident :pokemon/number
   :db/valueType :db.type/string
@@ -26,7 +26,11 @@
   :db/cardinality :db.cardinality/one}
  {:db/ident :stat/speed
   :db/valueType :db.type/long
-  :db/cardinality :db.cardinality/one}]
+  :db/cardinality :db.cardinality/one}
+ {:db/ident :pokemon/category
+  :db/valueType :db.type/keyword
+  :db/cardinality :db.cardinality/one
+  :db/doc "Legendary, Mythical, etc"}]
 
 ;; Data
 ; https://pokemondb.net/tools/text-list
@@ -174,11 +178,11 @@
  {:stat/hp 60, :stat/attack 115, :stat/speed 80, :pokemon/number "141", :stat/sp-defense 70, :stat/defense 105, :pokemon/name "Kabutops", :stat/sp-attack 65, :pokemon/type ["Rock" "Water"]}
  {:stat/hp 80, :stat/attack 105, :stat/speed 130, :pokemon/number "142", :stat/sp-defense 75, :stat/defense 65, :pokemon/name "Aerodactyl", :stat/sp-attack 60, :pokemon/type ["Rock" "Flying"]}
  {:stat/hp 160, :stat/attack 110, :stat/speed 30, :pokemon/number "143", :stat/sp-defense 110, :stat/defense 65, :pokemon/name "Snorlax", :stat/sp-attack 65, :pokemon/type ["Normal"]}
- {:stat/hp 90, :stat/attack 85, :stat/speed 85, :pokemon/number "144", :stat/sp-defense 125, :stat/defense 100, :pokemon/name "Articuno", :stat/sp-attack 95, :pokemon/type ["Ice" "Flying"]}
- {:stat/hp 90, :stat/attack 90, :stat/speed 100, :pokemon/number "145", :stat/sp-defense 90, :stat/defense 85, :pokemon/name "Zapdos", :stat/sp-attack 125, :pokemon/type ["Electric" "Flying"]}
- {:stat/hp 90, :stat/attack 100, :stat/speed 90, :pokemon/number "146", :stat/sp-defense 85, :stat/defense 90, :pokemon/name "Moltres", :stat/sp-attack 125, :pokemon/type ["Fire" "Flying"]}
+ {:stat/hp 90, :stat/attack 85, :stat/speed 85, :pokemon/number "144", :stat/sp-defense 125, :stat/defense 100, :pokemon/name "Articuno", :stat/sp-attack 95, :pokemon/type ["Ice" "Flying"], :pokemon/category :legendary}
+ {:stat/hp 90, :stat/attack 90, :stat/speed 100, :pokemon/number "145", :stat/sp-defense 90, :stat/defense 85, :pokemon/name "Zapdos", :stat/sp-attack 125, :pokemon/type ["Electric" "Flying"], :pokemon/category :legendary}
+ {:stat/hp 90, :stat/attack 100, :stat/speed 90, :pokemon/number "146", :stat/sp-defense 85, :stat/defense 90, :pokemon/name "Moltres", :stat/sp-attack 125, :pokemon/type ["Fire" "Flying"], :pokemon/category :legendary}
  {:stat/hp 41, :stat/attack 64, :stat/speed 50, :pokemon/number "147", :stat/sp-defense 50, :stat/defense 45, :pokemon/name "Dratini", :stat/sp-attack 50, :pokemon/type ["Dragon"]}
  {:stat/hp 61, :stat/attack 84, :stat/speed 70, :pokemon/number "148", :stat/sp-defense 70, :stat/defense 65, :pokemon/name "Dragonair", :stat/sp-attack 70, :pokemon/type ["Dragon"]}
  {:stat/hp 91, :stat/attack 134, :stat/speed 80, :pokemon/number "149", :stat/sp-defense 100, :stat/defense 95, :pokemon/name "Dragonite", :stat/sp-attack 100, :pokemon/type ["Dragon" "Flying"]}
- {:stat/hp 106, :stat/attack 110, :stat/speed 130, :pokemon/number "150", :stat/sp-defense 90, :stat/defense 90, :pokemon/name "Mewtwo", :stat/sp-attack 154, :pokemon/type ["Psychic"]}
+ {:stat/hp 106, :stat/attack 110, :stat/speed 130, :pokemon/number "150", :stat/sp-defense 90, :stat/defense 90, :pokemon/name "Mewtwo", :stat/sp-attack 154, :pokemon/type ["Psychic"], :pokemon/category :legendary}
  {:stat/hp 100, :stat/attack 100, :stat/speed 100, :pokemon/number "151", :stat/sp-defense 100, :stat/defense 100, :pokemon/name "Mew", :stat/sp-attack 100, :pokemon/type ["Psychic"]}]

@@ -1,4 +1,4 @@
-;; Schema
+;; Attributes
 
 [{:db/ident :person/first-name
   :db/valueType :db.type/string
