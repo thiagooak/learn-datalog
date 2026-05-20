@@ -26,7 +26,13 @@
     :else #{}))
 
 (defn safe-q? [q]
-  (let [allowed-fns #{'- '* '/ '+ '< '<= '= '> '>= 'count 'not 'not= 'missing?}]
+  (let [allowed-fns #{'- '* '/ '+
+                      '< '<= '= '> '>=
+                      'count 'not 'not= 'not-join 'missing?
+                      'or 'or-join 'and
+                      'sum 'avg 'min 'max 'count-distinct 'distinct
+                      'pull
+                      'clojure.string/starts-with? 'clojure.string/includes?}]
     (every? allowed-fns (find-fns (edn/read-string q)))))
 
 (defn run-q [dataset q]
