@@ -33,8 +33,12 @@
       [:link {:rel :stylesheet :href "https://cdn.jsdelivr.net/npm/@thiago.oak/code-highlighter@latest/prettylights.css"}]
       [:link {:rel :stylesheet :href (str "/main.css?v=" version)}]]
      [:body
-      nav
-      [:main children]
+      [:div {:style {:display "flex"}} nav
+      [:main children]]
+      [:footer
+       "This website is not associated with Nubank or Datomic"
+       " • "
+       [:a {:href "https://github.com/thiagooak/learn-datalog"} "GitHub"]]
       [:script {:src "https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" :data-manual "data-manual"}]
       [:script {:src "https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-clojure.min.js"}]
       [:script {:src "https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-sql.min.js"}]

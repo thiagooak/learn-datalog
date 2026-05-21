@@ -23,7 +23,6 @@ body {
     font:
         400 1em / 1.4 Inter,
         sans-serif;
-    display: flex;
 }
 
 nav {
@@ -51,6 +50,12 @@ main table {
 main table td, main table th {
     border-bottom: 1px solid;
     padding: 4px;
+}
+
+footer {
+    padding-bottom: 1em;
+    font-size: small;
+    text-align: right;
 }
 
 code-highlighter {
