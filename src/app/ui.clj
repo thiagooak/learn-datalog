@@ -39,6 +39,11 @@
        "This website is not associated with Nubank or Datomic"
        " • "
        [:a {:href "https://github.com/thiagooak/learn-datalog"} "GitHub"]]
+      [:script {:async true :src "https://www.googletagmanager.com/gtag/js?id=G-BMHSZQLLJ1"}]
+      [:script "window.dataLayer = window.dataLayer || [];
+                function gtag () {dataLayer.push (arguments);}
+                gtag ('js', new Date ());
+                gtag ('config', 'G-BMHSZQLLJ1');"]
       [:script {:src "https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-core.min.js" :data-manual "data-manual"}]
       [:script {:src "https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-clojure.min.js"}]
       [:script {:src "https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-sql.min.js"}]
